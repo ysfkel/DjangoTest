@@ -1,0 +1,83 @@
+
+
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="/static/myapp/style.css" />
+<link rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+ 
+<script  type="text/javascript" src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+<script  type="text/javascript" src="/static/bower_components/angular/angular.js"></script>
+
+
+<div class="container main">
+    
+<div class="row">
+      <div class="col-md-6"> 
+          <div ng-app="app">
+<div ng-controller='myCtr'>
+    <div ng-include src="template"></div>
+ 
+ </div>
+          </div>
+    </div>
+    
+</div>
+
+
+<script>
+    
+    angular.module('app',[])
+    .controller('myCtr',function($scope,$http,ajaxServices ){
+     
+        $scope.model={
+            item:{},
+            itemList:[]
+        };
+        
+           $scope.template = "/static/angularTemplates/index.html";
+            $scope.controller={};
+        
+        var url='/myapp/api/item/';
+          $scope.user="YUSUF KELO";
+            
+         ajaxServices.getList().then(function(data){
+               console.log('my list',data)
+                $scope.itemsList = data
+          });
+            
+              
+        
+        $scope.controller.save=function(){
+            console.log('sav',$scope.model.item)
+            $http.post(url,$scope.model.item)
+            .success(function(response,status,headers,config){
+                console.log('success');
+                    console.log(response)
+                     $scope.itemsList.push(response)
+            })
+            .error(function(response,status,headers,config){
+                console.log('error')
+                console.log(response)
+            })
+        }
+        
+    }).factory('ajaxServices',  function ($http, $q) { 
+    return {
+        getList : function () {
+            var deferred = $q.defer();
+
+            $http.get('/myapp/api/item/', { data: {} }).success(function (data) {
+              
+                console.log('data',data)
+                
+                deferred.resolve(data);
+            });
+            
+            return deferred.promise;
+        } 
+    }
+}); 
+
+    
+ 
+ </script>

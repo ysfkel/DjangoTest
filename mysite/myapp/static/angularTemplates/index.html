@@ -1,0 +1,26 @@
+<div >
+    <div class="container" ng-controller='myCtr'>
+    
+    <div class="row">
+
+        <form class="col-md-12">
+           <div class="col-md-5"><input type="text" class="form-control  " ng-model="model.item.name_text" ></div>
+           <div class="col-md-5">  <input type="button" class="btn btn-primary col-md-3" ng-click="controller.save()" value="Save" /></div>
+          </form>
+          <div class="col-md-8">
+              <table class="table table-striped">
+        <thead>
+            <tr><th>Id</th><th>Name</th></tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="mydata in itemsList">
+                <td>{{mydata.id}}</td><td>{{mydata.name_text}} </td>
+            </tr>
+        </tbody>
+    </table>
+           </div>
+    </div>
+    
+    
+ </div>
+</div>
