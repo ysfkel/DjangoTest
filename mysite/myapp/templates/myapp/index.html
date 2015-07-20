@@ -33,7 +33,7 @@
             item:{},
             itemList:[]
         };
-        
+         $scope.itemsList=[]
            $scope.template = "/static/angularTemplates/index.html";
             $scope.controller={};
         
@@ -53,7 +53,7 @@
             .success(function(response,status,headers,config){
                 console.log('success');
                     console.log(response)
-                     $scope.itemsList.push(response)
+                      $scope.itemsList.push(response)
             })
             .error(function(response,status,headers,config){
                 console.log('error')

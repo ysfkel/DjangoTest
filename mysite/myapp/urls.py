@@ -22,7 +22,7 @@ urlpatterns=patterns('',
 	url(r'^$',views.index,name='index'),
 	
 	url(r'^api/item/$',views.ItemList.as_view()),
-
+    url(r'^api/r/$',  views.MyRESTView.as_view()),
 	
 )
 
