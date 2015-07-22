@@ -34,7 +34,7 @@ class ItemList(APIView):
              result={'name_text':'kelo'}
              items.append(serializer.data)
              print('-------------ITEMS',items)
-             return Response(serializer.data, status=status.HTTP_201_CREATED)
+             return Response(items, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class MyRESTView(generics.ListCreateAPIView):

@@ -41,19 +41,21 @@
           $scope.user="YUSUF KELO";
             
          ajaxServices.getList().then(function(data){
-               console.log('my list',data)
+
                 $scope.itemsList = data
           });
             
-              
+             $scope.itemsList=[]     
         
         $scope.controller.save=function(){
-            console.log('sav',$scope.model.item)
+
             $http.post(url,$scope.model.item)
             .success(function(response,status,headers,config){
-                console.log('success');
+                $scope.itemsList=response
+             
+                   console.log('success');
                     console.log(response)
-                      $scope.itemsList.push(response)
+                     // $scope.itemsList.push(response)
             })
             .error(function(response,status,headers,config){
                 console.log('error')
@@ -79,5 +81,5 @@
 }); 
 
     
- 
+
  </script>
